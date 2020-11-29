@@ -124,13 +124,9 @@ class Usuario():
             self.get_telefono()
         ]
 
-        print('\n*DEBUG USER*\n', val, '\n*DEBUG USER*\n')
-
         self.bd.get_cursor().callproc('save_user', val)
         self.bd.get_commit()
         for i in self.bd.get_cursor().stored_results():
             r = str(i.fetchone()[0])
-        
-        print('\n*DEBUG USER R*\n', r, '\n*DEBUG USER R*\n')
 
         return r

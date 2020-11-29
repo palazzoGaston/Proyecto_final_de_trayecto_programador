@@ -206,8 +206,6 @@ class Cuenta():
             self.get_mail_secundario()
         ]
 
-        print('\n*DEBUG ACC*\n', val, '\n*DEBUG ACC*\n')
-
         self.__bd.get_cursor().callproc('save_acc', val)
         self.__bd.get_commit()
         for i in self.__bd.get_cursor().stored_results():
