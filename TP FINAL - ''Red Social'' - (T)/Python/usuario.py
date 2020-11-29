@@ -54,7 +54,6 @@ class Usuario():
         vld = validador
         r, dic = vld.validar_datos_de_usuario(update_form)
         if r == 0:
-            print('\n*DEBUG*\n', r,'\n*DEBUG*\n', dic)
             if 'nombre' in dic.keys():
                 self.set_nombre(dic['nombre'])
             elif 'apellido' in dic.keys():
@@ -124,8 +123,14 @@ class Usuario():
             self.get_ciudad(),
             self.get_telefono()
         ]
+
+        print('\n*DEBUG USER*\n', val, '\n*DEBUG USER*\n')
+
         self.bd.get_cursor().callproc('save_user', val)
         self.bd.get_commit()
         for i in self.bd.get_cursor().stored_results():
             r = str(i.fetchone()[0])
+        
+        print('\n*DEBUG USER R*\n', r, '\n*DEBUG USER R*\n')
+
         return r

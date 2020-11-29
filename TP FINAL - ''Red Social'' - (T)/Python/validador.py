@@ -21,17 +21,18 @@ class Validador():
             err.append('[Err]: la estructura contemplada de un mail valido es "username_valido@dominio_valido.com"')
         return err
     def verif_espacios_intermedios(self, key, val):
-        err=[]
+        err = []
         if (' ' in val) and (key not in ('user_id', 'cuenta_id', 'usuario', 'ciudad', 'pais')):
             err.append(f'[Err]: el campo {key} contiene espacios en blanco')
         return err
     def verif_campo_vacio(self, key, val):
-        err=[]
+        err = []
         if (val == '') and (key not in ('user_id', 'cuenta_id', 'usuario')):
             err.append(f'[Err]: el campo {key} esta vacio')
         return err
     # validaciones de usuario
     def validar_datos(self, key, val):
+        err = []
         if key == 'ciudad':
             val[1] = val[1].strip()
             err = self.verif_campo_vacio(key, val[1])
@@ -46,9 +47,10 @@ class Validador():
             err = self.verif_campo_vacio(key, val[1])
             err = self.verif_espacios_intermedios(key, val[1])
         else:
-            val = val.strip()
-            err = self.verif_campo_vacio(key, val)
-            err = self.verif_espacios_intermedios(key, val)
+            if key not in ('user_id', 'cuenta_id', 'usuario', 'ciudad', 'pais'):
+                val = val.strip()
+                err = self.verif_campo_vacio(key, val)
+                err = self.verif_espacios_intermedios(key, val)
         if err == []:
             if key == 'nombre':
                 val = val.capitalize()
