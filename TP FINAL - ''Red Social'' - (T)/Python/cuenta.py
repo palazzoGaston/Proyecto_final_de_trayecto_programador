@@ -205,7 +205,6 @@ class Cuenta():
             self.get_mail_primario(),
             self.get_mail_secundario()
         ]
-
         self.__bd.get_cursor().callproc('save_acc', val)
         self.__bd.get_commit()
         for i in self.__bd.get_cursor().stored_results():

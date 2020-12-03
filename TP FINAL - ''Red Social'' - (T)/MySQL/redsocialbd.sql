@@ -28,7 +28,7 @@ BEGIN
 	if EXISTS(SELECT usuarios_id FROM usuarios WHERE usuarios_id = amigo_id) then
 		if NOT EXISTS(SELECT usuario_id_amigo FROM amistades WHERE usuario_id_1 = mi_id AND usuario_id_amigo = amigo_id) then
 			INSERT INTO amistades
-			SELECT 0, (SELECT usuarios_id AS 'u_1' FROM usuarios WHERE usuarios_id = mi_id) AS 'mi_id', usuarios_id AS 'amigo_id'
+			SELECT NULL, (SELECT usuarios_id AS 'u_1' FROM usuarios WHERE usuarios_id = mi_id) AS 'mi_id', usuarios_id AS 'amigo_id'
 			FROM usuarios
 			WHERE usuarios_id = amigo_id;
 			set aux = 'amigo agregado';
