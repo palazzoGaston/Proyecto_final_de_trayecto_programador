@@ -7,7 +7,7 @@ import base64
 # class
 class Cuenta():
     # cnst
-    def __init__(self, cuenta_id=int, login_name=str, login_pass=str, usuario=Usuario, mail_primario=str, mail_secundario=str, database=DataBase):
+    def __init__(self, cuenta_id, login_name, login_pass, usuario, mail_primario, mail_secundario, database):
         self.__bd = database
         self.__cuenta_id = cuenta_id
         self.__login_name = login_name

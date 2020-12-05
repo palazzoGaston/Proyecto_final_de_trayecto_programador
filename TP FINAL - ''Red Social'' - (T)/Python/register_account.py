@@ -16,7 +16,7 @@ class Register():
         # validando datos de usuario
             # creacion de usuario (en tiempo de ejecucion)
         form_user = {
-            'user_id' : 0,
+            'user_id' : 'NULL',
             'nombre' : input('\n<nombre>: '),
             'apellido' : input('\n<apellido>: '),
             'edad' : input('\n<edad>: '),
@@ -31,10 +31,10 @@ class Register():
             # validando datos de cuenta
                 # creacion de cuenta (en tiempo de ejecucion)
             form_acc = {
-                'cuenta_id' : 0,
+                'cuenta_id' : 'NULL',
                 'login_name' : input('\n<login_name>: '),
                 'login_pass' : [input('\n<login_pass>: '), input('\n<login_pass_confirmacion>: ')],
-                'usuario' : 0,
+                'usuario' : 'NULL',
                 'mail_primario' : input('\n<mail_primario>: '),
                 'mail_secundario' : input('\n<mail_secundario>: ')
             }

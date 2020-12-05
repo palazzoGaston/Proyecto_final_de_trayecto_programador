@@ -29,13 +29,12 @@ class DataBase():
     def ejecutar(self, qry, val):
         self.__cursor.execute(qry, val)
     def actualizar_auto_increment(self, tab=str, col=str):
-        qry = 'SELECT MAX('+col+')+%s FROM '+tab+';'
-        val = (1, )
-        self.__cursor.execute(qry, val)
+        qry = 'SELECT MAX('+col+') FROM '+tab+';'
+        self.__cursor.execute(qry)
         r = self.__cursor.fetchone()[0]
         if r != None:
             qry = 'ALTER TABLE '+tab+' AUTO_INCREMENT = %s;'
-            val = (r, )
+            val = (r+1, )
         else:
             qry = 'ALTER TABLE '+tab+' AUTO_INCREMENT = %s;'
             val = (1, )

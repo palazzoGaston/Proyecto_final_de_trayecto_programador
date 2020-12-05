@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `amistades` (
   KEY `usuario_id_amigo` (`usuario_id_amigo`),
   CONSTRAINT `amistades_ibfk_1` FOREIGN KEY (`usuario_id_1`) REFERENCES `usuarios` (`usuarios_id`),
   CONSTRAINT `amistades_ibfk_2` FOREIGN KEY (`usuario_id_amigo`) REFERENCES `usuarios` (`usuarios_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   PRIMARY KEY (`cuenta_id`),
   KEY `usuario_id_2` (`usuario_id_2`),
   CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`usuario_id_2`) REFERENCES `usuarios` (`usuarios_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -288,9 +288,21 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`usuarios_id`),
   KEY `ciudad_ibfk_1` (`ciudad_id_1`),
   CONSTRAINT `ciudad_ibfk_1` FOREIGN KEY (`ciudad_id_1`) REFERENCES `ciudades` (`ciudad_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para vista redsocialbd.vista_usuario_edades
+-- Creando tabla temporal para superar errores de dependencia de VIEW
+CREATE TABLE `vista_usuario_edades` (
+	`usuario` VARCHAR(101) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`edad` VARCHAR(3) NOT NULL COLLATE 'utf8mb4_general_ci'
+) ENGINE=MyISAM;
+
+-- Volcando estructura para vista redsocialbd.vista_usuario_edades
+-- Eliminando tabla temporal y crear estructura final de VIEW
+DROP TABLE IF EXISTS `vista_usuario_edades`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vista_usuario_edades` AS SELECT CONCAT(nombre, ' ', apellido) AS usuario, edad FROM usuarios ORDER BY edad ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
