@@ -1,2 +1,0 @@
-SCRIPT EXPORTADO DEL TP TERMINADO
-	. redsocial.sql -> https://pastebin.com/rmivec9N
