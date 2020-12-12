@@ -87,7 +87,7 @@ class Cuenta():
             else:
                 print('\n[MENSAJE]: no se realizo ningun cambio')
     def mostrar_lista_de_amigos(self):
-        qry = '''SELECT CONCAT(usuarios.nombre, " ", usuarios.apellido)
+        qry = '''SELECT CONCAT(usuarios.nombre, " ", usuarios.apellido), usuarios.usuarios_id
         FROM amistades
         INNER JOIN usuarios ON amistades.usuario_id_amigo = usuarios.usuarios_id
         WHERE amistades.usuario_id_1 = %s;'''
@@ -96,8 +96,9 @@ class Cuenta():
         r = self.__bd.get_cursor().fetchall()
         if r != []:
             print('\n\tLISTA DE AMIGOS')
+            print('\nUsuario\t\t|\tID\n')
             for amigos in r:
-                print(f'{amigos[0]}')
+                print(f'{amigos[0]}\t\t{amigos[1]}')
         else:
             print('\n[MENSAJE]: tu lista de amigos se encuentra vacia actualmente')
     def mostrar_categorias_de_publicacion(self):
@@ -148,12 +149,15 @@ class Cuenta():
         for i in self.__bd.get_cursor().stored_results():
             print(f'\n[MENSAJE]: {i.fetchone()[0]}')
     def agregar_amigo(self, amigo_id):
-        self.__bd.actualizar_auto_increment('amistades', 'amistades_id')
-        val = [self.get_usuario().get_user_id(), amigo_id]
-        self.__bd.get_cursor().callproc('agregar_amigo', val)
-        self.__bd.get_commit()
-        for i in self.__bd.get_cursor().stored_results():
-            print(f'\n[MENSAJE]: {i.fetchone()[0]}')
+        if amigo_id != str(self.get_usuario().get_user_id()):
+            self.__bd.actualizar_auto_increment('amistades', 'amistades_id')
+            val = [self.get_usuario().get_user_id(), amigo_id]
+            self.__bd.get_cursor().callproc('agregar_amigo', val)
+            self.__bd.get_commit()
+            for i in self.__bd.get_cursor().stored_results():
+                print(f'\n[MENSAJE]: {i.fetchone()[0]}')
+        else:
+            print('\n[Err]: no puedes agregarte a ti mismo como amigo!')
     def eliminar_todas_las_publicaciones(self):
         val = [self.get_usuario().get_user_id()]
         self.__bd.get_cursor().callproc('eliminar_todas_las_publicaciones', val)

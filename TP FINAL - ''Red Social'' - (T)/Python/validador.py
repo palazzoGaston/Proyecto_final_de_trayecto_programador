@@ -10,7 +10,7 @@ class Validador():
     def validar_mail(self, val):
         err = []
         count = 0
-        dominios_validos = ['hotmail.com', 'gmail.com']
+        dominios_validos = ['@hotmail.com', '@gmail.com', '@yahoo.com']
         if '@' in val:
             for dom in dominios_validos:
                 if dom in val:

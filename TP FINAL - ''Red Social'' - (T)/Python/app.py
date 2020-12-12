@@ -14,9 +14,7 @@ while True:
     if opc=='0':
         break
     elif opc=='1':
-        usuario_activo = sse_ctrl.inciar_sesion()
-        if (type(usuario_activo).__name__).lower() == 'cuenta':
-            sse_ctrl.menu_principal(usuario_activo)
+        sse_ctrl.inciar_sesion()
     elif opc=='2':
         reg.register_account()
     else:
